@@ -1,0 +1,23 @@
+<div>
+  filters works!
+ <ul>
+   <li *ngFor="let category of filters">
+     {{category.name}}
+    <ul>
+      <li *ngFor="let filter of category.filters">
+        <div *ngIf="category.operation=='OR'">
+            <input [name]="category.name" (change)="selectOr(category,filter,category.filters,filters)"  type="radio"/>{{filter.name}}
+        </div>
+        <div *ngIf="category.operation=='AND'">
+            <input (change)="selectAnd(category,filter,category.filters,filters)" type="checkbox"/>{{filter.name}}
+        </div>
+        
+      </li>
+    </ul>
+
+   </li>
+ </ul>
+ <button (click)="save()">Save</button>
+   
+   
+</div>

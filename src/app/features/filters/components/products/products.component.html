@@ -1,0 +1,16 @@
+<div class="products-component">
+  Products
+  <button mat-fab>Basic</button>
+  <button mat-fab color="primary">Primary</button>
+  <button mat-fab color="accent">Accent</button>
+  <button mat-fab color="warn">Warn</button>
+  <button mat-fab disabled>Disabled</button>
+  <ul class="products">
+    <ul class="product" *ngFor="let product of products">
+      <li>{{product.brand}}</li>
+      <li>{{product.size}}</li>
+      <li>{{product.color}}</li>
+    </ul>
+
+  </ul>
+ 
