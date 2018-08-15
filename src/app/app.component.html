@@ -1,8 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
     <mat-sidenav-container class="example-sidenav-container">
-        <mat-sidenav #snav [mode]="'push'"
-                     fixedTopGap="56">
+        <mat-sidenav>
                               <mat-card style="width:100px;" class="example-card">
 
                                   <img mat-card-image   src="http://i.pravatar.cc/300" alt="Photo of a Shiba Inu">
@@ -26,12 +25,18 @@
                 <mat-toolbar-row>
                   <button mat-icon-button (click)="snav.toggle()">
                     <mat-icon>menu</mat-icon></button>
-                  <span>SportIt</span>
+                  <span>SportIt {{isLoggedIn}}</span>
+                  <button *ngIf="!isLoggedIn" class="align-right-all" mat-button color="accent">Signup</button>
+                  <button *ngIf="!isLoggedIn" mat-button color="accent" [routerLink]="['/login']">Login</button>
 
-                  <button mat-button color="primary">Primary</button>
+
+                  <button *ngIf="isLoggedIn" class="align-right-all" mat-button color="accent">Welcome!</button>
+                  <button *ngIf="isLoggedIn"   mat-button color="accent" [routerLink]="['/login']">Signout</button>
+
+
                 </mat-toolbar-row>
                 </mat-toolbar>
-                <div>
+                <div style="min-height:200px;">
                     <router-outlet>
 
                      </router-outlet>

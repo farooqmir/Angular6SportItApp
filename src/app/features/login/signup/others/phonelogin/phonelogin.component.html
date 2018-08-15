@@ -1,0 +1,41 @@
+
+<div class="phonelogin">
+
+  <h1>Login with us with your phone</h1>
+  <mat-card color="primary">
+      <mat-card-header>
+        <mat-card-title>
+            Please login to continue
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="phone" formControlName="phone" required>
+            <mat-error *ngIf="isFieldInvalid('phone')">
+              Please enter your phone number
+            </mat-error>
+          </mat-form-field> &nbsp;&nbsp;
+          <button mat-raised-button color="primary" (click)="sendLoginCode()" id="sign-in-button" >Send me Code</button>
+
+
+        </form>
+        <div *ngIf="windowRef.confirmationResult">
+
+            <label for="code">Enter your Verification Code Here</label><br>
+            <input matInput  type="text" name="code" [(ngModel)]="verificationCode">
+
+            <button mat-raised-button color="primary"  (click)="verifyLoginCode()">Verify</button>
+
+          </div>
+      </mat-card-content>
+    </mat-card>
+
+  <div id="recaptcha-container"></div>
+
+
+
+
+</div>

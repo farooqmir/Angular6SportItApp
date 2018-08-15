@@ -1,3 +1,6 @@
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,6 +14,7 @@ import { AppRoutModule } from './app.routing';
 import { RouterModule, Routes } from '@angular/router';
 import { FilterAppRoutingModule } from './features/filters/shared/filter.routing';
 import { MatXAppModule } from './features/mat/mat.module';
+
 import {
   MatAutocompleteModule,
 
@@ -49,8 +53,11 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { LoginComponent } from './features/login/login/login.component';
+import { LoginComponent, WindowService } from './features/login/login/login.component';
 import { AuthService } from './features/login/login/auth.service';
+import { SignupComponent } from './features/login/signup/signup.component';
+import { OthersigninsComponent } from './features/login/signup/others/othersignins/othersignins.component';
+import { PhoneloginComponent } from './features/login/signup/others/phonelogin/phonelogin.component';
 
 @Component({
   selector: 'app-rt',
@@ -76,7 +83,10 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'rt'},
   { path: 'rt', pathMatch: 'full', component: RootAppDemoComponent },
 
-  { path: 'rt2', pathMatch: 'full', component: RootAppDemo2Component}
+  { path: 'rt2', pathMatch: 'full', component: RootAppDemo2Component},
+  { path: 'signup', pathMatch: 'full', component: SignupComponent},
+  { path: 'phonesignup', pathMatch: 'full', component: PhoneloginComponent}
+
 
 
 
@@ -84,13 +94,27 @@ const routes: Routes = [
 
 ];
 
+export const environment = {
+  production: false,
+  firebase: {
+     apiKey: "AIzaSyCq1ElvUHA5sFKKfQYSm4y1mZ_AjfBlu2I",
+     authDomain: "sportit-55a7c.firebaseapp.com",
+     databaseURL: "https://sportit-55a7c.firebaseio.com",
+     projectId: "sportit-55a7c",
+     storageBucket: "sportit-55a7c.appspot.com",
+     messagingSenderId: "502977040146"
+  }
+};
 @NgModule({
 
-  declarations: [AppComponent,  RootAppDemoComponent, RootAppDemo2Component, LoginComponent],
+  declarations: [AppComponent,  RootAppDemoComponent, RootAppDemo2Component, LoginComponent, SignupComponent, OthersigninsComponent, PhoneloginComponent],
   imports: [
     BrowserModule,
-    MatToolbarModule,
-    FormsModule, ReactiveFormsModule,
+     AngularFireModule.initializeApp(environment.firebase),
+     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+      MatToolbarModule,
+      FormsModule, ReactiveFormsModule,
       BrowserAnimationsModule,
       MatAutocompleteModule,
       MatBadgeModule,
@@ -133,7 +157,7 @@ const routes: Routes = [
 
   ],
   exports:  [RouterModule],
-  providers: [AuthService],
+  providers: [AuthService, WindowService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

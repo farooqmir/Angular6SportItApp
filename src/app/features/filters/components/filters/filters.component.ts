@@ -14,7 +14,7 @@ export class FiltersComponent implements OnInit {
   constructor() { }
 
   save(category, filter){
-    alert();
+    //alert();
     console.log(this.filters);
   }
 

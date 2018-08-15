@@ -6,6 +6,7 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
+
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
           <mat-form-field class="full-width-input">
@@ -20,8 +21,9 @@
               Please inform your password
             </mat-error>
           </mat-form-field> &nbsp;&nbsp;
-          <button mat-raised-button color="primary">Login</button>
+          <button mat-raised-button color="primary"  id="sign-in-button" >Login</button>
         </form>
       </mat-card-content>
     </mat-card>
+
   </div>
